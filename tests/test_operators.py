@@ -16,7 +16,7 @@ from minitorch.operators import (
     log_back,
     inv_back,
     sum,
-    is_close
+    is_close,
 )
 from hypothesis import given
 from hypothesis.strategies import lists
@@ -105,18 +105,14 @@ def test_sigmoid(a):
     * It crosses 0 at 0.5
     * it is  strictly increasing.
     """
-    # TODO: Implement for Task 0.2.
+
     if a == 0.5:
         assert sigmoid(a) == 0
 
-    elif a>0 : 
-        assert sigmoid(a+1) >= sigmoid(a)
-        assert 1 >= sigmoid(a) and  sigmoid(a) >= 0
-        assert is_close(sigmoid(a) , 1-sigmoid(-a))
-
-    
-    
-    
+    elif a > 0:
+        assert sigmoid(a + 1) >= sigmoid(a)
+        assert 1 >= sigmoid(a) and sigmoid(a) >= 0
+        assert is_close(sigmoid(a), 1 - sigmoid(-a))
 
 
 @pytest.mark.task0_2
@@ -124,39 +120,42 @@ def test_sigmoid(a):
 def test_transitive(a, b, c):
     "Test the transitive property of less-than (a < b and b < c implies a < c)"
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    if a > b:
+        if c > a:
+            assert c > b
 
 
 @pytest.mark.task0_2
-def test_symmetric():
+@given(small_floats, small_floats)
+def test_symmetric(a, b):
     """
     Write a test that ensures that :func:`minitorch.operators.mul` is symmetric, i.e.
     gives the same value regardless of the order of its input.
     """
     None
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert mul(a, b) == mul(b, a)
 
 
 @pytest.mark.task0_2
-def test_distribute():
+@given(small_floats, small_floats, small_floats)
+def test_distribute(a, b, c):
     r"""
     Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    None
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+
+    assert is_close(mul(a, add(b, c)) ,add(mul(a, b), mul(a, c)))
 
 
 @pytest.mark.task0_2
-def test_other():
+@given(small_floats, small_floats)
+def test_other(a, b):
     """
     Write a test that ensures some other property holds for your functions.
     """
-    None
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+
+    assert eq(a, id(a))
 
 
 # ## Task 0.3  - Higher-order functions
