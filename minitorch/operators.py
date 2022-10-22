@@ -12,83 +12,42 @@ import math
 
 def mul(x, y):
     ":math:`f(x, y) = x * y`"
-<<<<<<< HEAD
     return x * y
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def id(x):
     ":math:`f(x) = x`"
-<<<<<<< HEAD
     return x
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def add(x, y):
     ":math:`f(x, y) = x + y`"
-<<<<<<< HEAD
     return x + y
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def neg(x):
     ":math:`f(x) = -x`"
-<<<<<<< HEAD
     return -x
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def lt(x, y):
     ":math:`f(x) =` 1.0 if x is less than y else 0.0"
-<<<<<<< HEAD
     return 1 if x < y else 0
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def eq(x, y):
     ":math:`f(x) =` 1.0 if x is equal to y else 0.0"
-<<<<<<< HEAD
     return 1 if x == y else 0
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def max(x, y):
     ":math:`f(x) =` x if x is greater than y else y"
-<<<<<<< HEAD
     return x if x > y else y
 
 
 def is_close(x, y):
     ":math:`f(x) = |x - y| < 1e-2`"
     return abs(x - y) < 1e-2
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
-
-
-def is_close(x, y):
-    ":math:`f(x) = |x - y| < 1e-2` "
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def sigmoid(x):
@@ -109,15 +68,10 @@ def sigmoid(x):
     Returns:
         float : sigmoid value
     """
-<<<<<<< HEAD
     if x >= 0:
         return 1 / (1 + math.exp(-x))
     else:
         return math.exp(x) / (1 + math.exp(x))
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def relu(x):
@@ -132,12 +86,7 @@ def relu(x):
     Returns:
         float : relu value
     """
-<<<<<<< HEAD
     return x if x >= 0 else 0
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 EPS = 1e-6
@@ -155,42 +104,22 @@ def exp(x):
 
 def log_back(x, d):
     r"If :math:`f = log` as above, compute :math:`d \times f'(x)`"
-<<<<<<< HEAD
     return mul(d, 1 / x)
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def inv(x):
     ":math:`f(x) = 1/x`"
-<<<<<<< HEAD
     return 1 / x
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def inv_back(x, d):
     r"If :math:`f(x) = 1/x` compute :math:`d \times f'(x)`"
-<<<<<<< HEAD
     return mul(d, mul(-2, inv(-x)))
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 def relu_back(x, d):
     r"If :math:`f = relu` compute :math:`d \times f'(x)`"
-<<<<<<< HEAD
     return mul(d, lt(0, x))
-=======
-    # TODO: Implement for Task 0.1.
-    raise NotImplementedError('Need to implement for Task 0.1')
->>>>>>> parent of 565befb ( task 01 done ')
 
 
 # ## Task 0.3
