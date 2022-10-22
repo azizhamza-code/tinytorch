@@ -16,6 +16,7 @@ from minitorch.operators import (
     log_back,
     inv_back,
     sum,
+    is_close
 )
 from hypothesis import given
 from hypothesis.strategies import lists
@@ -105,7 +106,17 @@ def test_sigmoid(a):
     * it is  strictly increasing.
     """
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    if a == 0.5:
+        assert sigmoid(a) == 0
+
+    elif a>0 : 
+        assert sigmoid(a+1) >= sigmoid(a)
+        assert 1 >= sigmoid(a) and  sigmoid(a) >= 0
+        assert is_close(sigmoid(a) , 1-sigmoid(-a))
+
+    
+    
+    
 
 
 @pytest.mark.task0_2
