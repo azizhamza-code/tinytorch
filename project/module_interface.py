@@ -9,9 +9,7 @@ minitorch
 def render_module_sandbox():
     st.write("## Sandbox for Module Trees")
 
-    st.write(
-        "Visual debugging checks showing the module tree that your code constructs."
-    )
+    st.write("Visual debugging checks showing the module tree that your code constructs.")
 
     code = st.text_area(
         label="Module code",

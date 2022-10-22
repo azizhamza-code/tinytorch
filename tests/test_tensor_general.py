@@ -236,14 +236,8 @@ if numba.cuda.is_available():
     def test_mul_practice5():
         "Extend to require a batch"
         size = 33
-        x = [
-            [[random.random() for i in range(size)] for j in range(size)]
-            for _ in range(2)
-        ]
-        y = [
-            [[random.random() for i in range(size)] for j in range(size)]
-            for _ in range(2)
-        ]
+        x = [[[random.random() for i in range(size)] for j in range(size)] for _ in range(2)]
+        y = [[[random.random() for i in range(size)] for j in range(size)] for _ in range(2)]
         z = minitorch.tensor(x, backend=shared["fast"]) @ minitorch.tensor(
             y, backend=shared["fast"]
         )
@@ -263,14 +257,8 @@ if numba.cuda.is_available():
         size_a = 45
         size_b = 40
         size_in = 33
-        x = [
-            [[random.random() for i in range(size_in)] for j in range(size_a)]
-            for _ in range(2)
-        ]
-        y = [
-            [[random.random() for i in range(size_b)] for j in range(size_in)]
-            for _ in range(2)
-        ]
+        x = [[[random.random() for i in range(size_in)] for j in range(size_a)] for _ in range(2)]
+        y = [[[random.random() for i in range(size_b)] for j in range(size_in)] for _ in range(2)]
         z = minitorch.tensor(x, backend=shared["fast"]) @ minitorch.tensor(
             y, backend=shared["fast"]
         )
@@ -349,9 +337,5 @@ def test_bmm(backend, data):
     b = data.draw(tensors(backend=shared[backend], shape=(1, B, C)))
 
     c = a @ b
-    c2 = (
-        (a.contiguous().view(D, A, B, 1) * b.contiguous().view(1, 1, B, C))
-        .sum(2)
-        .view(D, A, C)
-    )
+    c2 = (a.contiguous().view(D, A, B, 1) * b.contiguous().view(1, 1, B, C)).sum(2).view(D, A, C)
     assert_close_tensor(c, c2)

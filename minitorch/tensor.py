@@ -79,14 +79,10 @@ class Tensor(Variable):
         return self.backend.Mul.apply(self, self._ensure_tensor(b))
 
     def __truediv__(self, b):
-        return self.backend.Mul.apply(
-            self, self.backend.Inv.apply(self._ensure_tensor(b))
-        )
+        return self.backend.Mul.apply(self, self.backend.Inv.apply(self._ensure_tensor(b)))
 
     def __rtruediv__(self, b):
-        return self.backend.Mul.apply(
-            self._ensure_tensor(b), self.backend.Inv.apply(self)
-        )
+        return self.backend.Mul.apply(self._ensure_tensor(b), self.backend.Inv.apply(self))
 
     def __matmul__(self, b):
         "Not used until Module 3"
@@ -215,9 +211,7 @@ class Tensor(Variable):
 
     def zeros(self, shape=None):
         def zero(shape):
-            return Tensor.make(
-                [0] * int(operators.prod(shape)), shape, backend=self.backend
-            )
+            return Tensor.make([0] * int(operators.prod(shape)), shape, backend=self.backend)
 
         if shape is None:
             out = zero(self.shape)

@@ -73,9 +73,7 @@ class SentimentCNN(nn.Module):
 
 
 # training loop
-def train(
-    model, data_train, data_val, learning_rate=0.001, max_epochs=50, batch_size=128
-):
+def train(model, data_train, data_val, learning_rate=0.001, max_epochs=50, batch_size=128):
     # loss and optimization functions
     criterion = nn.BCELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -91,9 +89,7 @@ def train(
         train_correct = 0
         train_loss = 0
         n_batches = 0
-        for batch_num, example_num in enumerate(
-            range(0, n_training_samples, batch_size)
-        ):
+        for batch_num, example_num in enumerate(range(0, n_training_samples, batch_size)):
             y = torch.tensor(y_train[example_num : example_num + batch_size])
             x = torch.tensor(X_train[example_num : example_num + batch_size])
             model.zero_grad()
@@ -146,9 +142,7 @@ if __name__ == "__main__":
     EMBEDDING_SIZE = 50
     (X_train, y_train), (X_val, y_val) = encode_sentiment_data(
         load_dataset("glue", "sst2"),
-        embeddings.GloveEmbedding(
-            "wikipedia_gigaword", d_emb=EMBEDDING_SIZE, show_progress=True
-        ),
+        embeddings.GloveEmbedding("wikipedia_gigaword", d_emb=EMBEDDING_SIZE, show_progress=True),
         2500,
         250,
     )

@@ -37,9 +37,7 @@ class Linear(minitorch.Module):
                 )
         for j in range(out_size):
             self.bias.append(
-                self.add_parameter(
-                    f"bias_{j}", minitorch.Scalar(2 * (random.random() - 0.5))
-                )
+                self.add_parameter(f"bias_{j}", minitorch.Scalar(2 * (random.random() - 0.5)))
             )
 
     def forward(self, inputs):

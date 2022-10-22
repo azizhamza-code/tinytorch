@@ -30,9 +30,9 @@ class Linear(minitorch.Module):
 
     def forward(self, x):
         batch, in_size = x.shape
-        return (
-            x.view(batch, in_size) @ self.weights.value.view(in_size, self.out_size)
-        ).view(batch, self.out_size) + self.bias.value
+        return (x.view(batch, in_size) @ self.weights.value.view(in_size, self.out_size)).view(
+            batch, self.out_size
+        ) + self.bias.value
 
 
 class Conv2d(minitorch.Module):
@@ -115,9 +115,7 @@ class ImageTrain:
     def run_one(self, x):
         return self.model.forward(minitorch.tensor([x], backend=BACKEND))
 
-    def train(
-        self, data_train, data_val, learning_rate, max_epochs=500, log_fn=default_log_fn
-    ):
+    def train(self, data_train, data_val, learning_rate, max_epochs=500, log_fn=default_log_fn):
         (X_train, y_train) = data_train
         (X_val, y_val) = data_val
         self.model = Network()
@@ -129,18 +127,12 @@ class ImageTrain:
             total_loss = 0.0
 
             model.train()
-            for batch_num, example_num in enumerate(
-                range(0, n_training_samples, BATCH)
-            ):
+            for batch_num, example_num in enumerate(range(0, n_training_samples, BATCH)):
 
                 if n_training_samples - example_num <= BATCH:
                     continue
-                y = minitorch.tensor(
-                    y_train[example_num : example_num + BATCH], backend=BACKEND
-                )
-                x = minitorch.tensor(
-                    X_train[example_num : example_num + BATCH], backend=BACKEND
-                )
+                y = minitorch.tensor(y_train[example_num : example_num + BATCH], backend=BACKEND)
+                x = minitorch.tensor(X_train[example_num : example_num + BATCH], backend=BACKEND)
                 x.requires_grad_(True)
                 y.requires_grad_(True)
                 # Forward

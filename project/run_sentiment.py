@@ -20,9 +20,9 @@ class Linear(minitorch.Module):
 
     def forward(self, x):
         batch, in_size = x.shape
-        return (
-            x.view(batch, in_size) @ self.weights.value.view(in_size, self.out_size)
-        ).view(batch, self.out_size) + self.bias.value
+        return (x.view(batch, in_size) @ self.weights.value.view(in_size, self.out_size)).view(
+            batch, self.out_size
+        ) + self.bias.value
 
 
 class Conv1d(minitorch.Module):
@@ -71,7 +71,7 @@ class CNNSentimentKim(minitorch.Module):
 
     def forward(self, embeddings):
         """
-            embeddings tensor: [batch x sentence length x embedding dim]
+        embeddings tensor: [batch x sentence length x embedding dim]
         """
         # ASSIGN4.5
         # permute embedding dim to input channels dim for conv layer
@@ -122,9 +122,7 @@ def default_log_fn(
     validation_accuracy,
 ):
     global best_val
-    best_val = (
-        best_val if best_val > validation_accuracy[-1] else validation_accuracy[-1]
-    )
+    best_val = best_val if best_val > validation_accuracy[-1] else validation_accuracy[-1]
     print(f"Epoch {epoch}, loss {train_loss}, train accuracy: {train_accuracy[-1]:.2%}")
     if len(validation_predictions) > 0:
         print(f"Validation accuracy: {validation_accuracy[-1]:.2%}")
@@ -157,9 +155,7 @@ class SentenceSentimentTrain:
             model.train()
             train_predictions = []
             batch_size = min(batch_size, n_training_samples)
-            for batch_num, example_num in enumerate(
-                range(0, n_training_samples, batch_size)
-            ):
+            for batch_num, example_num in enumerate(range(0, n_training_samples, batch_size)):
                 y = minitorch.tensor(
                     y_train[example_num : example_num + batch_size], backend=BACKEND
                 )
@@ -186,8 +182,14 @@ class SentenceSentimentTrain:
             if data_val is not None:
                 (X_val, y_val) = data_val
                 model.eval()
-                y = minitorch.tensor(y_val, backend=BACKEND,)
-                x = minitorch.tensor(X_val, backend=BACKEND,)
+                y = minitorch.tensor(
+                    y_val,
+                    backend=BACKEND,
+                )
+                x = minitorch.tensor(
+                    X_val,
+                    backend=BACKEND,
+                )
                 out = model.forward(x)
                 validation_predictions += get_predictions_array(y, out)
                 validation_accuracy.append(get_accuracy(validation_predictions))
@@ -207,9 +209,7 @@ class SentenceSentimentTrain:
             total_loss = 0.0
 
 
-def encode_sentences(
-    dataset, N, max_sentence_len, embeddings_lookup, unk_embedding, unks
-):
+def encode_sentences(dataset, N, max_sentence_len, embeddings_lookup, unk_embedding, unks):
     Xs = []
     ys = []
     for sentence in dataset["sentence"][:N]:
@@ -239,9 +239,7 @@ def encode_sentiment_data(dataset, pretrained_embeddings, N_train, N_val=0):
         max_sentence_len = max(max_sentence_len, len(sentence.split()))
 
     unks = set()
-    unk_embedding = [
-        0.1 * (random.random() - 0.5) for i in range(pretrained_embeddings.d_emb)
-    ]
+    unk_embedding = [0.1 * (random.random() - 0.5) for i in range(pretrained_embeddings.d_emb)]
     X_train, y_train = encode_sentences(
         dataset["train"],
         N_train,

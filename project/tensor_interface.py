@@ -32,9 +32,7 @@ def st_visualize_storage(tensor: Tensor, selected_position: int, max_size=10):
             marker=dict(
                 size=50,
                 symbol="square",
-                color=[
-                    "#69BAC9" if x_ == selected_position else "lightgray" for x_ in x
-                ],
+                color=["#69BAC9" if x_ == selected_position else "lightgray" for x_ in x],
             ),
             text=tensor._tensor._storage[:max_size],
             textposition="middle center",
@@ -62,9 +60,7 @@ def st_visualize_storage(tensor: Tensor, selected_position: int, max_size=10):
     st.write(fig)
 
 
-def st_visualize_tensor(
-    tensor: Tensor, highlighted_index, strides=None, show_value=True
-):
+def st_visualize_tensor(tensor: Tensor, highlighted_index, strides=None, show_value=True):
     depth = tensor.shape[0]
     rows = tensor.shape[1] if len(tensor.shape) > 1 else 1
     columns = tensor.shape[2] if len(tensor.shape) > 2 else 1
@@ -135,13 +131,9 @@ def interface_index_to_position(tensor: Tensor, hide_function_defs: bool):
             render_function(index_to_position)
     col1, col2 = st.beta_columns(2)
     idx = eval(
-        col1.text_input(
-            "Multi-dimensional index", value=str([0] * len(tensor._tensor.strides))
-        )
+        col1.text_input("Multi-dimensional index", value=str([0] * len(tensor._tensor.strides)))
     )
-    tensor_strides = eval(
-        col2.text_input("Tensor strides", value=str(tensor._tensor.strides))
-    )
+    tensor_strides = eval(col2.text_input("Tensor strides", value=str(tensor._tensor.strides)))
     st_visualize_tensor(tensor, idx, tensor_strides)
 
 
@@ -201,9 +193,7 @@ def interface_permute(tensor: Tensor, hide_function_defs: bool):
     else:
         viz_tensor = p_tensor
     st_visualize_tensor(viz_tensor, out_index, show_value=False)
-    st_visualize_storage(
-        tensor, index_to_position(out_index, viz_tensor._tensor.strides)
-    )
+    st_visualize_storage(tensor, index_to_position(out_index, viz_tensor._tensor.strides))
 
 
 def st_eval_error_message(expression: str, error_msg: str):

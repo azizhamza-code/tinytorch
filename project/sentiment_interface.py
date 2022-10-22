@@ -11,17 +11,13 @@ EMBEDDING_SIZE = 50
 
 
 def predictions_dataframe(predictions, sentences):
-    df_predictions = pd.DataFrame(
-        predictions, columns=["true_label", "predicted_label", "logit"]
-    )
+    df_predictions = pd.DataFrame(predictions, columns=["true_label", "predicted_label", "logit"])
     df_predictions["sentence"] = sentences[: len(predictions)]
     df_predictions["error"] = df_predictions.apply(
         lambda row: abs(row.true_label - row.logit), axis=1
     )
     # reorder
-    return df_predictions[
-        ["sentence", "true_label", "predicted_label", "logit", "error"]
-    ]
+    return df_predictions[["sentence", "true_label", "predicted_label", "logit", "error"]]
 
 
 @st.cache(allow_output_mutation=True)
@@ -36,9 +32,7 @@ def load_data(dataset, n_train, n_val):
     print("Loading embeddings... This can take a while the first time.")
     return encode_sentiment_data(
         dataset,
-        embeddings.GloveEmbedding(
-            "wikipedia_gigaword", d_emb=EMBEDDING_SIZE, show_progress=True
-        ),
+        embeddings.GloveEmbedding("wikipedia_gigaword", d_emb=EMBEDDING_SIZE, show_progress=True),
         n_train,
         n_val,
     )
@@ -79,13 +73,9 @@ def render_run_sentiment_interface():
     st.subheader("Training config")
     col1, col2 = st.beta_columns(2)
     max_epochs = col1.number_input("Max epochs", value=250)
-    learning_rate = col2.number_input(
-        "Learning rate", value=0.01, step=0.001, format="%.3f"
-    )
+    learning_rate = col2.number_input("Learning rate", value=0.01, step=0.001, format="%.3f")
     n_training_data = col1.number_input("N datapoints from training data", value=450)
-    n_validation_data = col2.number_input(
-        "N datapoints from validation data", value=100
-    )
+    n_validation_data = col2.number_input("N datapoints from validation data", value=100)
     batch_size = st.number_input("Batch size", value=10)
 
     if st.button("Train model"):
@@ -101,9 +91,7 @@ def render_run_sentiment_interface():
         with st.beta_expander("Epoch stats"):
             st_epoch_stats = st.empty()
 
-        (X_train, y_train), (X_val, y_val) = load_data(
-            dataset, n_training_data, n_validation_data
-        )
+        (X_train, y_train), (X_val, y_val) = load_data(dataset, n_training_data, n_validation_data)
         print("Initializing model...")
         sentiment_model_trainer = SentenceSentimentTrain(
             CNNSentimentKim(

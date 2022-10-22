@@ -7,9 +7,7 @@ from math_interface import render_math_sandbox
 
 parser = ArgumentParser()
 parser.add_argument("module_num", type=int)
-parser.add_argument(
-    "--hide_function_defs", action="store_true", dest="hide_function_defs"
-)
+parser.add_argument("--hide_function_defs", action="store_true", dest="hide_function_defs")
 args = parser.parse_args()
 module_num = args.module_num
 hide_function_defs = args.hide_function_defs

@@ -8,9 +8,7 @@ import minitorch
 import interface.plots as plots
 
 
-def render_train_interface(
-    TrainCls, graph=True, hidden_layer=True, parameter_control=False
-):
+def render_train_interface(TrainCls, graph=True, hidden_layer=True, parameter_control=False):
     datasets_map = minitorch.datasets
     st.write("## Sandbox for Model Training")
 
@@ -53,9 +51,7 @@ def render_train_interface(
     if parameter_control:
         st.markdown("### Parameters")
         for n, p in train.model.named_parameters():
-            value = st.slider(
-                f"Parameter: {n}", min_value=-10.0, max_value=10.0, value=p.value
-            )
+            value = st.slider(f"Parameter: {n}", min_value=-10.0, max_value=10.0, value=p.value)
             p.update(value)
 
     oned = st.checkbox("Show X-Axis Only (For Simple)", False)
@@ -88,9 +84,7 @@ def render_train_interface(
             "Learning rate", [0.001, 0.01, 0.05, 0.1, 0.5, 1.0, 5.0], index=2
         )
 
-        max_epochs = col2.number_input(
-            "Number of epochs", min_value=1, step=25, value=500
-        )
+        max_epochs = col2.number_input("Number of epochs", min_value=1, step=25, value=500)
 
         col1, col2 = st.beta_columns(2)
         st_train_button = col1.empty()

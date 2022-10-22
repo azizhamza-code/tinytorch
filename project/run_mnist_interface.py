@@ -20,9 +20,7 @@ def render_run_image_interface():
     (X_train, y_train) = make_mnist(0, n_training_samples)
 
     show = st.number_input("Image", min_value=0, max_value=100, step=1, value=1)
-    st.write(
-        px.imshow(X_train[show], title="y =" + str([int(i) for i in y_train[show]]))
-    )
+    st.write(px.imshow(X_train[show], title="y =" + str([int(i) for i in y_train[show]])))
 
     st.markdown("### Hyperparameters")
     col1, col2 = st.beta_columns(2)
@@ -74,9 +72,7 @@ def render_run_image_interface():
                 yaxis=dict(range=[0, max(losses)]),
             )
             st_epoch_plot.plotly_chart(fig)
-            print(
-                f"Epoch: {epoch}/{max_epochs}, loss: {total_loss}, correct: {correct}"
-            )
+            print(f"Epoch: {epoch}/{max_epochs}, loss: {total_loss}, correct: {correct}")
 
         train.train(
             (X_train, y_train),

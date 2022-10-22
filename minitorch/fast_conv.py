@@ -66,16 +66,12 @@ def tensor_conv1d(
     batch, in_channels, width = input_shape
     out_channels_, in_channels_, kw = weight_shape
 
-    assert (
-        batch == batch_
-        and in_channels == in_channels_
-        and out_channels == out_channels_
-    )
+    assert batch == batch_ and in_channels == in_channels_ and out_channels == out_channels_
     s1 = input_strides
     s2 = weight_strides
 
     # TODO: Implement for Task 4.1.
-    raise NotImplementedError('Need to implement for Task 4.1')
+    raise NotImplementedError("Need to implement for Task 4.1")
 
 
 class Conv1dFun(Function):
@@ -99,9 +95,7 @@ class Conv1dFun(Function):
 
         # Run convolution
         output = input.zeros((batch, out_channels, w))
-        tensor_conv1d(
-            *output.tuple(), output.size, *input.tuple(), *weight.tuple(), False
-        )
+        tensor_conv1d(*output.tuple(), output.size, *input.tuple(), *weight.tuple(), False)
         return output
 
     @staticmethod
@@ -186,11 +180,7 @@ def tensor_conv2d(
     batch, in_channels, height, width = input_shape
     out_channels_, in_channels_, kh, kw = weight_shape
 
-    assert (
-        batch == batch_
-        and in_channels == in_channels_
-        and out_channels == out_channels_
-    )
+    assert batch == batch_ and in_channels == in_channels_ and out_channels == out_channels_
 
     s1 = input_strides
     s2 = weight_strides
@@ -199,7 +189,7 @@ def tensor_conv2d(
     s20, s21, s22, s23 = s2[0], s2[1], s2[2], s2[3]
 
     # TODO: Implement for Task 4.2.
-    raise NotImplementedError('Need to implement for Task 4.2')
+    raise NotImplementedError("Need to implement for Task 4.2")
 
 
 class Conv2dFun(Function):
@@ -221,9 +211,7 @@ class Conv2dFun(Function):
         out_channels, in_channels2, kh, kw = weight.shape
         assert in_channels == in_channels2
         output = input.zeros((batch, out_channels, h, w))
-        tensor_conv2d(
-            *output.tuple(), output.size, *input.tuple(), *weight.tuple(), False
-        )
+        tensor_conv2d(*output.tuple(), output.size, *input.tuple(), *weight.tuple(), False)
         return output
 
     @staticmethod

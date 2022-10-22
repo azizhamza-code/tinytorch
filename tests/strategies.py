@@ -13,7 +13,13 @@ med_ints = integers(min_value=1, max_value=20)
 
 @composite
 def vals(draw, size, number):
-    pts = draw(lists(number, min_size=size, max_size=size,))
+    pts = draw(
+        lists(
+            number,
+            min_size=size,
+            max_size=size,
+        )
+    )
     return minitorch.tensor(pts)
 
 
@@ -77,17 +83,13 @@ def shaped_tensors(
     for i in range(n):
         data = draw(lists(numbers, min_size=td.size, max_size=td.size))
         values.append(
-            minitorch.Tensor(
-                minitorch.TensorData(data, td.shape, td.strides), backend=backend
-            )
+            minitorch.Tensor(minitorch.TensorData(data, td.shape, td.strides), backend=backend)
         )
     return values
 
 
 @composite
-def matmul_tensors(
-    draw, numbers=floats(allow_nan=False, min_value=-100, max_value=100)
-):
+def matmul_tensors(draw, numbers=floats(allow_nan=False, min_value=-100, max_value=100)):
 
     i, j, k = [draw(integers(min_value=1, max_value=10)) for _ in range(3)]
 
@@ -107,7 +109,13 @@ def assert_close(a, b):
 
 def assert_close_tensor(a, b):
     if a.is_close(b).all().item() != 1.0:
-        assert False, (
-            "Tensors are not close \n x.shape=%s \n x=%s \n y.shape=%s \n y=%s \n Diff=%s %s"
-            % (a.shape, a, b.shape, b, a - b, a.is_close(b))
+        assert (
+            False
+        ), "Tensors are not close \n x.shape=%s \n x=%s \n y.shape=%s \n y=%s \n Diff=%s %s" % (
+            a.shape,
+            a,
+            b.shape,
+            b,
+            a - b,
+            a.is_close(b),
         )

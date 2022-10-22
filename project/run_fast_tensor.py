@@ -127,6 +127,6 @@ if __name__ == "__main__":
     HIDDEN = int(args.HIDDEN)
     RATE = args.RATE
 
-    FastTrain(
-        HIDDEN, backend=FastTensorBackend if args.BACKEND != "gpu" else GPUBackend
-    ).train(data, RATE)
+    FastTrain(HIDDEN, backend=FastTensorBackend if args.BACKEND != "gpu" else GPUBackend).train(
+        data, RATE
+    )

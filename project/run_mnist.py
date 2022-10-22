@@ -104,9 +104,7 @@ for i in range(10000, 10500):
     if y == 3 or y == 5:
         val_ys.append(1.0 if y == 3 else 0.0)
         val_x += images[i]
-vis.images(
-    numpy.array(val_x).reshape((len(val_ys), 1, 28, 28))[:BATCH], win="val_images"
-)
+vis.images(numpy.array(val_x).reshape((len(val_ys), 1, 28, 28))[:BATCH], win="val_images")
 
 
 model = Network2()

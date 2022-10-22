@@ -54,9 +54,7 @@ def render_math_sandbox(use_scalar=False, use_tensor=False):
             if use_tensor:
                 scatter = go.Scatter(mode="lines", x=xs, y=[x.grad[0] for x in x_var])
             else:
-                scatter = go.Scatter(
-                    mode="lines", x=xs, y=[x.derivative for x in x_var]
-                )
+                scatter = go.Scatter(mode="lines", x=xs, y=[x.derivative for x in x_var])
             fig = go.Figure(scatter)
             st.write(fig)
             G = graph_builder.GraphBuilder().run(out)
@@ -73,16 +71,12 @@ def render_math_sandbox(use_scalar=False, use_tensor=False):
         if use_scalar:
             if use_tensor:
                 zs = [
-                    [
-                        scalar(minitorch.tensor([x]), minitorch.tensor([y]))[0]
-                        for x in xs
-                    ]
+                    [scalar(minitorch.tensor([x]), minitorch.tensor([y]))[0] for x in xs]
                     for y in ys
                 ]
             else:
                 zs = [
-                    [scalar(minitorch.Scalar(x), minitorch.Scalar(y)).data for x in xs]
-                    for y in ys
+                    [scalar(minitorch.Scalar(x), minitorch.Scalar(y)).data for x in xs] for y in ys
                 ]
         else:
             zs = [[scalar(x, y) for x in xs] for y in ys]
@@ -144,8 +138,6 @@ def render_math_sandbox(use_scalar=False, use_tensor=False):
                 z=[[scalar(minitorch.tensor([x, y]))[0] for x in xs] for y in ys],
             )
         else:
-            scatter = go.Surface(
-                x=xs, y=ys, z=[[scalar([x, y]) for x in xs] for y in ys]
-            )
+            scatter = go.Surface(x=xs, y=ys, z=[[scalar([x, y]) for x in xs] for y in ys])
         fig = go.Figure(scatter)
         st.write(fig)
