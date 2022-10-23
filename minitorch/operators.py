@@ -105,6 +105,7 @@ def exp(x):
 
 def log_back(x, d):
     r"If :math:`f = log` as above, compute :math:`d \times f'(x)`"
+    
     return mul(d, 1 / x)
 
 
